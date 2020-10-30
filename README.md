@@ -36,8 +36,8 @@ end_date=1599609500
 ```
 * Garder ce fichier dans le .gitignore puisqu'il contient des identifiants
 * Lancer le serveur : `npm start`
-* Pour executer la requête : **GET** `http://localhost:3000/netatmo/means` qui se trouve dans le fichier `requests.rest``
-
+* Pour executer la requête : **GET** `http://localhost:3000/netatmo/means` qui se trouve dans le fichier `requests.rest`
+* La date : `end_date=` dans le fichier `.env` doit être mise avant le 9 septembre, je me suis rendu compte que le serveur n'a plus de valeur après cette date
 
 Je me suis servi du fichier `.env` comme fichier de config, dans une vraie interface, ces fichiers seraient séparés et modifiable
 
