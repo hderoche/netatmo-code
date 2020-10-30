@@ -13,6 +13,8 @@ Les contraintes que vous devez respecter :
 
 ### Server NodeJS
 
+J'utilise l'extension `RestClient` sur *Visual Studio Code* pour pouvoir envoyer des requêtes au serveur, le fichier contenant les requêtes est : `requests.rest`
+
 Pour démarrer le serveur, il faut : 
 * Se rendre dans le dossier avec un terminal
 * Executer `npm install` pour installer les dépendances néccessaires
