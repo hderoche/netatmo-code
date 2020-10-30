@@ -35,6 +35,9 @@ real_time=false
 end_date=1599609500
 ```
 * Garder ce fichier dans le .gitignore puisqu'il contient des identifiants
+* Lancer le serveur : `npm start`
+* Pour executer la requête : **GET** `http://localhost:3000/netatmo/means` qui se trouve dans le fichier `requests.rest``
+
 
 Je me suis servi du fichier `.env` comme fichier de config, dans une vraie interface, ces fichiers seraient séparés et modifiable
 
