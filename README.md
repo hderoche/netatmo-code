@@ -28,10 +28,11 @@ password=<your_password>
 
 device_id=70%3Aee%3A50%3A04%3Aa4%3A4e
 module_id=02%3A00%3A00%3A04%3Aa0%3Ac8
-scale=1month
+scale=1hour
 type=temperature
 optimize=false
 real_time=false
+end_date=1599609500
 ```
 * Garder ce fichier dans le .gitignore puisqu'il contient des identifiants
 
