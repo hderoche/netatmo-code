@@ -1,7 +1,5 @@
 
-const { json } = require('express');
 const request = require('request');
-const { response } = require('../app');
 require('dotenv').config();
 
 
@@ -96,14 +94,17 @@ exports.getMeans = async (req, res) =>{
              */
 
             // First need to get the right timestamps for the request to be on 7 days
-            current_date = new Date();
-            var minus_seven_date = new Date();
-            minus_seven_date.setDate(current_date.getDate() - 7);
-            t_date = Math.floor(minus_seven_date.getTime()/1000);
+            // End date must be set before September 9 because the server apparently stopped storing data on the device I am using
+            end_date = new Date(process.env.begin_date * 1000);
+            if(end_date.getTime() >= 1599609600000) return;
+            var begin_date = new Date();
+            begin_date.setDate(end_date.getDate() - 7);
+            begin_date_timestamp = Math.floor(end_date.getTime()/1000);
+            end_date_timestamp = Math.floor(begin_date.getTime()/1000);
+
 
             // Creating the url using the right parameters from the .env config file
-            urlNetatmo = `https://api.netatmo.com/api/getmeasure?device_id=${process.env.device_id}&module_id=${process.env.module_id}&scale=${process.env.scale}&type=${process.env.type}&optimize=${process.env.optimize}&real_time=${process.env.real_time}`;
-            
+            urlNetatmo = `https://api.netatmo.com/api/getmeasure?device_id=${process.env.device_id}&module_id=${process.env.module_id}&scale=${process.env.scale}&type=${process.env.type}&date_begin=${begin_date_timestamp}&date_end=${end_date_timestamp}&optimize=${process.env.optimize}&real_time=${process.env.real_time}`;
             // Building the request
             var headers = {
                 'Host': 'api.netatmo.com',
@@ -126,11 +127,12 @@ exports.getMeans = async (req, res) =>{
                     
                     // Eventually send the unprocessed data to the client
                     //res.send(json)
-
+                    //console.log(json_data.body)
                     // Once the request is received I use the data to get the mean, min, and max
                     var mean = 0;
-                    var max = -10000000000;
-                    var min = 10000000000;
+                    // Initialing the min & max with the first value of the array
+                    var max = json_data.body[Object.keys(json_data.body)[0]];
+                    var min = json_data.body[Object.keys(json_data.body)[0]];
                     var min_date="";
                     var max_date="";
                     var index = 0;
@@ -149,7 +151,8 @@ exports.getMeans = async (req, res) =>{
                     };
                     min_date = new Date(parseInt(min_date) * 1000);
                     max_date = new Date(parseInt(max_date) * 1000);
-                    stats = {mean: mean/index, min_value: min, min_date: min_date,max_value: max, max_date: max_date};
+                    mean = parseFloat((mean/index).toFixed(2));
+                    stats = {from: begin_date,to: end_date,mean, min_value: min, min_date, max_value: max, max_date};
                     res.send(stats);
                     return stats;
 
