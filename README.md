@@ -14,9 +14,9 @@ Les contraintes que vous devez respecter :
 ### Server NodeJS
 
 Pour démarrer le serveur, il faut : 
-* se rendre dans le dossier avec un terminal
-* executer `npm install` pour installer les dépendances néccessaires
-* créer un fichier `.env` et copier-coller ses identifiants sous la forme :
+* Se rendre dans le dossier avec un terminal
+* Executer `npm install` pour installer les dépendances néccessaires
+* Créer un fichier `.env` et copier-coller ses identifiants sous la forme :
 ```
 client_id=<your_client_id>
 client_secret=<your_client_secret>
@@ -31,7 +31,7 @@ type=temperature
 optimize=false
 real_time=false
 ```
-* Garder se fichier dans le .gitignore puisqu'il contient des identifiants
+* Garder ce fichier dans le .gitignore puisqu'il contient des identifiants
 
 Je me suis servi du fichier `.env` comme fichier de config, dans une vraie interface, ces fichiers seraient séparés et modifiable
 
