@@ -95,12 +95,13 @@ exports.getMeans = async (req, res) =>{
 
             // First need to get the right timestamps for the request to be on 7 days
             // End date must be set before September 9 because the server apparently stopped storing data on the device I am using
-            end_date = new Date(process.env.begin_date * 1000);
-            if(end_date.getTime() >= 1599609600000) return;
+            end_date = new Date(process.env.end_date * 1000);
+            console.log(end_date)
+            if(end_date.getTime() >= 1599609600000) return res.json({message: 'Date is set after September 9th '});
             var begin_date = new Date();
             begin_date.setDate(end_date.getDate() - 7);
-            begin_date_timestamp = Math.floor(end_date.getTime()/1000);
             end_date_timestamp = Math.floor(begin_date.getTime()/1000);
+            begin_date_timestamp = Math.floor(end_date.getTime()/1000);
 
 
             // Creating the url using the right parameters from the .env config file
