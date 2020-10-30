@@ -3,7 +3,10 @@ const app = require('./app');
 const netatmoRouter = require('./routes/netatmo');
 require('dotenv').config();
 
-
+/**
+ * Preventing the server from having bugs on setup
+ * Checking the port given
+ */
 const normalizePort = val => {
     const port = parseInt(val, 10);
   
@@ -16,8 +19,10 @@ const normalizePort = val => {
     return false;
   };
   const port = normalizePort(process.env.PORT || '3000');
+  // Setting the port
   app.set('port', port);
   
+  // Listen for error so that we have the server error
   const errorHandler = error => {
     if (error.syscall !== 'listen') {
       throw error;
@@ -37,9 +42,11 @@ const normalizePort = val => {
         throw error;
     }
   };
-  
+
+// creating an http server for the requests to be handled
 const server = http.createServer(app);
 
+// Calling the methods previously written
 server.on('error', errorHandler);
 server.on('listening', () => {
 const address = server.address();

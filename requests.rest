@@ -1,7 +1,7 @@
 
-// Getting the measure from the API
+// Getting the Mean, Min, and Max from the API
+// Does the authentification and the getmeasures + logic to get mean, min, and max
 GET http://localhost:3000/netatmo/means
-Authorization: Bearer 5f944fb26280f722546c7805|d0b9f14fdf65f7860dbdbbdd6e5d9da3
 
 ###
 // Getting the access token from the netatmo API
@@ -12,9 +12,11 @@ GET http://localhost:3000/netatmo/access_token
 
 ###
 // Direct request to the api
+// Use the http://localhost:3000/netatmo/access_token to get a valid token
 GET https://api.netatmo.com/api/getmeasure?device_id=70%3Aee%3A50%3A04%3Aa4%3A4e&module_id=02%3A00%3A00%3A04%3Aa0%3Ac8&scale=1month&type=temperature&optimize=false&real_time=false
 Authorization: Bearer 5f944fb26280f722546c7805|d0b9f14fdf65f7860dbdbbdd6e5d9da3
 
 ###
+// Check for the validity of the token which might change
 GET http://localhost:3000/netatmo/measures
 Authorization: Bearer 5f944fb26280f722546c7805|d0b9f14fdf65f7860dbdbbdd6e5d9da3
